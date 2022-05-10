@@ -1,4 +1,3 @@
 <?
-echo "ignore files";
-echo "ignorando";
+echo 'pass';
 ?>
