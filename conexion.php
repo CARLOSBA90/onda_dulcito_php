@@ -1,0 +1,3 @@
+<?
+echo "ignore files";
+?>
