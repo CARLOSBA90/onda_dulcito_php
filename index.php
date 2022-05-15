@@ -1,5 +1,13 @@
 <?php
- header("Access-Control-Allow-Origin: *"); ?>
+ header("Access-Control-Allow-Origin: *"); 
+ include('conexion.php');
+$consulta = 'select * from usuario';
+$resultado = mysqli_query($conexion,$consulta); 
+$usuario="usuario es: ";
+while($registro=mysqli_fetch_assoc($resultado)){
+$usuario.= $registro['nombre'];
+}
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,15 +31,15 @@
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="border-end bg-white" id="sidebar-wrapper" >
                 <div class="sidebar-heading border-bottom bg-light principal">Bud&iacute;n</div>
                 <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 principal"  href="#">Lo ultimo! <i class="fa fa-calendar-check-o"></i></a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 budines" id="budines" href="#">Budines & Tortas</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 cupcakes" id="cupcakes"  href="#">Cupcakes</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 vasitos" id="vasitos"   href="#">Vasitos</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 dimension" id="dimension" href="#">De otra dimensi&oacute;n <i class="fa fa-heartbeat"></i></a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 combina" id="combina"   href="#">Combina los ingrendientes!</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-2 principal"  href="#">Lo ultimo! <i class="fa fa-calendar-check-o"></i></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 budines" id="budines" href="#">Budines & Tortas</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 cupcakes" id="cupcakes"  href="#">Cupcakes</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 vasitos" id="vasitos"   href="#">Vasitos</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 dimension" id="dimension" href="#">De otra dimensi&oacute;n <i class="fa fa-heartbeat"></i></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 combina" id="combina"   href="#">Combina los ingrendientes!</a>
 
                 </div>
             </div>
@@ -44,7 +52,8 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                 <li class="nav-item"><a class="nav-link" href="#!">Lo + visto!</a></li> 
+                            <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#documentacion">Documentación Web</a></li> 
+                                 <li class="nav-item"><a class="nav-link" href="#">Lo + visto!</a></li> 
                                  <li class="nav-item dropdown"> 
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a> 
                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> 
@@ -60,13 +69,14 @@
                 <!-- Page content-->
                 <div class="container-fluid">
                     <div id="principal" name="principal">
-                        <h2 class="mt-4">Lista de recetas</h2>
-                        <br>
-                        <p>Receta 1</p>
-                        <p>... </p>
-
-                        </p>
-                    </div>
+                    <?=$usuario?>
+ 
+ 
+                  </div>
+                    <?php
+                        ///DATOS A ESTE NIVEL
+                     
+                    ?>
                     
                     <div id="listado" name="listado"></div>
                 
@@ -76,7 +86,7 @@
 
 
         <div class="modal fade" id="sugerir" tabindex="-1" role="dialog" aria-labelledby="sugerirModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="sugerirModalLabel">Sugerir receta</h5>
@@ -87,12 +97,16 @@
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Apodo</label>
+                      <label for="recipient-name" class="col-form-label">Nombre de receta</label>
                       <input type="text" class="form-control" id="titulo">
                     </div>
                     <div class="form-group">
                       <label for="message-text" class="col-form-label">Ingredientes + Pasos</label>
                       <textarea class="form-control" id="texto" rows="6"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Tu apodo</label>
+                      <input type="text" class="form-control" id="apodo">
                     </div>
                   </form>
                 </div>
@@ -116,6 +130,29 @@
                 </div>
                 <div class="modal-body">
                  Pagina dedicada a la promoci&oacute;n  y sugerencias de postres dulces!
+                </div>
+                <div class="modal-footer">
+                   <small><i class="fa fa-copyright" aria-hidden="true">Copyright 2022</i></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="modal fade" id="documentacion" tabindex="-1" role="dialog" aria-labelledby="docuModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="docuModalLabel">Documentaci&oacute;n web</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                     Documentación del sitio<br>
+                    <strong>Herramientas</strong>: php, css, html, sql, git
+                     <h3>Tablas SQL</h3> 
+                     <img class="img-fluid" src="img/tablas.jpg" title="Tablas sql"  alt="Tablas sql"/>
                 </div>
                 <div class="modal-footer">
                    <small><i class="fa fa-copyright" aria-hidden="true">Copyright 2022</i></small>
