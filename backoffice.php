@@ -1,6 +1,12 @@
 <?php
  header("Access-Control-Allow-Origin: *"); 
  include('conexion.php');
+$consulta = 'select * from usuario';
+$resultado = mysqli_query($conexion,$consulta); 
+$usuario="usuario es: ";
+while($registro=mysqli_fetch_assoc($resultado)){
+$usuario.= $registro['nombre'];
+}
  ?>
 
 <!DOCTYPE html>
@@ -26,14 +32,13 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper" >
-                <div class="sidebar-heading border-bottom bg-light principal">Bud&iacute;n</div>
+                <div class="sidebar-heading border-bottom bg-light principal">Backoffice</div>
                 <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-2 principal"  href="#">Lo ultimo! <i class="fa fa-calendar-check-o"></i></a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-2 budines" id="budines" href="#">Budines & Tortas</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-2 cupcakes" id="cupcakes"  href="#">Cupcakes</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-2 vasitos" id="vasitos"   href="#">Vasitos</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-2 dimension" id="dimension" href="#">De otra dimensi&oacute;n <i class="fa fa-heartbeat"></i></a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-2 combina" id="combina"   href="#">Combina los ingrendientes!</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-2 principal"  href="#">General</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 " id="" href="#">Edicion</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 " id=""  href="#">Listados</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 " id=""   href="#">Estadisticas</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-2 " id="" href="#">Sugeridos</a>
 
                 </div>
             </div>
@@ -47,15 +52,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                             <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#documentacion">Documentación Web</a></li> 
-                                 <li class="nav-item"><a class="nav-link" href="#">Lo + visto!</a></li> 
-                                 <li class="nav-item dropdown"> 
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a> 
-                                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> 
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#sugerir" href="#" id="sugerencia">Sugerir receta</a> 
-                                       <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" data-toggle="modal" data-target="#acerca" href="#">Acerca de Budin</a> 
-                                </div> 
-                                 </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Salir del sistema</a></li> 
+                             
                             </ul>
                         </div>
                     </div>
@@ -64,6 +62,52 @@
                 <div class="container-fluid">
                     <div id="principal" name="principal">
 
+                    <table class="display dataTable no-footer">
+                      <thead>
+                        <tr>
+                          <th class="sort">ID Receta</th>
+                          <th class="sort">Nombre</th>
+                          <th class="sort">Descripci&oacute;n</th>
+                          <th class="sort">Secci&oacute;n</th>
+                        </tr>
+                      </thead>
+                      <tbody>                  
+                        <tr>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data2</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data2</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data2</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data2</td>
+                          <td>Data</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                         <th class="sort">ID Receta</th>
+                          <th class="sort">Nombre</th>
+                          <th class="sort">Descripci&oacute;n</th>
+                          <th class="sort">Secci&oacute;n</th>
+                        </tr>
+                      </tfoot>
+                    </table>   
+                    <?=$usuario?>
+ 
  
                   </div>
                     <?php
@@ -160,16 +204,18 @@
         <script>
  
                $(document).ready( function () {
+                      setTimeout(function(){
+                        $('table').DataTable({
+                    
+                        responsive: true
+                      });
+                        }, 500);
 
                         $("#listado").hide();
                   } );
 
          var principalActivo = true;
-         var budines         = "budines.php";
-         var combina         = "combina.php";
-         var cupcakes        = "cupcakes.php"; 
-         var dimension       = "dimension.php";    
-         var vasitos         = "vasitos.php"               
+         var edicion        = "";
 
 
             $(".principal").on('click', function(event){
@@ -189,39 +235,10 @@
                      }
             };          
 
-     $("#budines").click(function(event) {
+     $("#edicion").click(function(event) {
          chequearPrincipal();
          $("#listado").load(budines);
         
-        });
-
-        $("#combina").click(function(event) {
-         chequearPrincipal();
-        $("#listado").load(combina);
-         
-        });
-
-        $("#cupcakes").click(function(event) {
-         chequearPrincipal();
-        $("#listado").load(cupcakes);
-         
-        });
-
-        $("#dimension").click(function(event) {
-         chequearPrincipal();
-        $("#listado").load(dimension);
-         
-        });
-
-        $("#vasitos").click(function(event) {
-         chequearPrincipal();
-        $("#listado").load(vasitos);
-         
-        });
-
-       $("#sugerencia").click(function(event) {
-           // $('#').val("GeeksForGeeks");
-           console.log("nuevo registro en accion");
         });
 
         
