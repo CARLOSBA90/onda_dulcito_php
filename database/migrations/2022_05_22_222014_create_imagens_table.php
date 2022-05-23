@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateImagensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('imagens', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
             $table->increments('id');
-            $table->string('nombre',30)->unique();
-            $table->string('email',100)->unique();
-            $table->integer('nivel',1);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('pass');
-            $table->rememberToken();
+            $table->integer('id_receta');
+            $table->integer('id_secuencia');
+            $table->string('url',100);
+            $table->string('descripcion',100);
+            $table->integer('tamano');
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('imagens');
     }
 }

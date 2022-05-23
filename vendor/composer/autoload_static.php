@@ -186,8 +186,8 @@ class ComposerStaticInitce9569522464ccc07ad9ba964e749cbf
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Whoops\\' => 
         array (
@@ -331,8 +331,8 @@ class ComposerStaticInitce9569522464ccc07ad9ba964e749cbf
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -518,7 +518,14 @@ class ComposerStaticInitce9569522464ccc07ad9ba964e749cbf
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\CantidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/CantidadController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ImagenController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImagenController.php',
+        'App\\Http\\Controllers\\IngredienteController' => __DIR__ . '/../..' . '/app/Http/Controllers/IngredienteController.php',
+        'App\\Http\\Controllers\\RecetaController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecetaController.php',
+        'App\\Http\\Controllers\\SeccionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SeccionController.php',
+        'App\\Http\\Controllers\\SugeridoController' => __DIR__ . '/../..' . '/app/Http/Controllers/SugeridoController.php',
+        'App\\Http\\Controllers\\TipoController' => __DIR__ . '/../..' . '/app/Http/Controllers/TipoController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -528,6 +535,14 @@ class ComposerStaticInitce9569522464ccc07ad9ba964e749cbf
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\Cantidad' => __DIR__ . '/../..' . '/app/Models/Cantidad.php',
+        'App\\Models\\Contador' => __DIR__ . '/../..' . '/app/Models/Contador.php',
+        'App\\Models\\Imagen' => __DIR__ . '/../..' . '/app/Models/Imagen.php',
+        'App\\Models\\Ingrediente' => __DIR__ . '/../..' . '/app/Models/Ingrediente.php',
+        'App\\Models\\Receta' => __DIR__ . '/../..' . '/app/Models/Receta.php',
+        'App\\Models\\Seccion' => __DIR__ . '/../..' . '/app/Models/Seccion.php',
+        'App\\Models\\Sugerido' => __DIR__ . '/../..' . '/app/Models/Sugerido.php',
+        'App\\Models\\Tipo' => __DIR__ . '/../..' . '/app/Models/Tipo.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
