@@ -17,7 +17,6 @@ class CreateSugeridosTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
-            $table->id();
             $table->increments('id');
             $table->string('nombre',50);
             $table->string('descripcion',2000);

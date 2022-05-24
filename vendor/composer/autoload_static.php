@@ -519,6 +519,7 @@ class ComposerStaticInitce9569522464ccc07ad9ba964e749cbf
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\CantidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/CantidadController.php',
+        'App\\Http\\Controllers\\ContadorController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContadorController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ImagenController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImagenController.php',
         'App\\Http\\Controllers\\IngredienteController' => __DIR__ . '/../..' . '/app/Http/Controllers/IngredienteController.php',

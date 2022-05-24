@@ -12,4 +12,9 @@ class Receta extends Model
     protected $attributes = [
         'activo' => false
     ];
+
+    public function users()
+    {
+        return $this->hasOne(User::class);
+    }
 }
