@@ -14,15 +14,15 @@ class CreateSugeridosTable extends Migration
     public function up()
     {
         Schema::create('sugeridos', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
             $table->increments('id');
             $table->string('nombre',50);
             $table->string('descripcion',2000);
             $table->string('apodo',50);
             $table->date_time_set();
             $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
         });
     }
 

@@ -14,13 +14,15 @@ class CreateCantidadsTable extends Migration
     public function up()
     {
         Schema::create('cantidads', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
+           // ojo al cambiar(hacer update), son registros historicos, inmodificables
             $table->increments('id');
             $table->integer('tipo');
             $table->integer('unidad');
             $table->timestamps();
+            $table->unique(['tipo', 'unidad']);
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
         });
     }
 

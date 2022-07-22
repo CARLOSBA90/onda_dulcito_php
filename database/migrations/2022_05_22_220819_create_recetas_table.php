@@ -14,9 +14,7 @@ class CreateRecetasTable extends Migration
     public function up()
     {
         Schema::create('recetas', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
+
             $table->increments('id');
             $table->string('nombre',50)->unique();
             $table->string('descripcion',2000);
@@ -24,6 +22,9 @@ class CreateRecetasTable extends Migration
             $table->timestamps('ultima_modificacion');
             $table->date_time_set();
             $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
         });
     }
 
