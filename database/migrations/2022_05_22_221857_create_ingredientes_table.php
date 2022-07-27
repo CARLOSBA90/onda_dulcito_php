@@ -14,10 +14,8 @@ class CreateIngredientesTable extends Migration
     public function up()
     {
         Schema::create('ingredientes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreign('id')->references('id')->on('receta')->onDelete('cascade');
-            $table->foreign('id')->references('id')->on('receta')->onUpdate('cascade');
-            $table->string('nombre',60);
+            $table->id();
+            $table->string('nombre');
             $table->timestamps();
             $table->unique('nombre');
             $table->engine = 'InnoDB';

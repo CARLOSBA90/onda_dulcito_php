@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeccionRecetasTable extends Migration
+class CreateIngredienteCantidadTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,30 @@ class CreateSeccionRecetasTable extends Migration
      */
     public function up()
     {
-        Schema::create('seccion_recetas', function (Blueprint $table) {
+        Schema::create('ingrediente_cantidad', function (Blueprint $table) {
+            /*verificar relaciones */
             $table->id();
-            $table->foreignId('seccion_id')
+            
+            $table->foreignId('ingrediente_id')
             ->nullable()
-            ->constrained('seccions')
+            ->constrained('ingredientes')
             ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+            ->nullOnDelete();
+
+            $table->foreignId('cantidad_id')
+            ->nullable()
+            ->constrained('cantidads')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
+
             $table->foreignId('receta_id')
             ->nullable()
             ->constrained('recetas')
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
+
             $table->timestamps();
-            $table->unique(['seccion_id', 'receta_id']);
+            $table->unique(['receta_id','ingrediente_id', 'cantidad_id']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -40,6 +50,6 @@ class CreateSeccionRecetasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seccion_recetas');
+        Schema::dropIfExists('ingrediente_cantidad');
     }
 }

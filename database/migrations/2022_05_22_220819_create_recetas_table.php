@@ -15,13 +15,11 @@ class CreateRecetasTable extends Migration
     {
         Schema::create('recetas', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->string('nombre',50)->unique();
+            $table->id();
+            $table->string('nombre')->unique();
             $table->string('descripcion',2000);
             $table->boolean('activo');
-            $table->timestamps('ultima_modificacion');
-            $table->date_time_set();
-            $table->timestamps();
+            $table->timestamps('');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

@@ -14,12 +14,14 @@ class CreateContadorsTable extends Migration
     public function up()
     {
         Schema::create('contadors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('receta_id')->unsigned()->index();
-            $table->foreign('receta_id')->references('id')->on('receta')->onDelete('cascade');
-            $table->foreign('receta_id')->references('id')->on('receta')->onUpdate('cascade');
-            $table->integer('nro_contador');
-            $table->unique('receta_id');
+            $table->id();
+            $table->biginteger('nro_contador');
+            $table->foreignId('id_receta')
+             ->unique()
+            ->nullable()
+            ->constrained('recetas')
+            ->cascadeOnUpdate()
+            ->cascadeOnDelete();
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';

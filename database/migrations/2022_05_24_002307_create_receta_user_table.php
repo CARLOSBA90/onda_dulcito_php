@@ -14,13 +14,17 @@ class CreateRecetaUserTable extends Migration
     public function up()
     {
         Schema::create('receta_user', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('receta_id')->unsigned()->index();
-			$table->foreign('receta_id')->references('id')->on('receta')->onDelete('cascade');
-            $table->foreign('receta_id')->references('id')->on('receta')->onUpdate('cascade');
-			$table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('user')->onUpdate('cascade');
-		//	$table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('receta_id')
+            ->nullable()
+            ->constrained('recetas')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
+            $table->foreignId('user_id')
+            ->nullable()
+            ->constrained('users')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
             $table->timestamps();
             $table->unique(['receta_id', 'user_id']);
             $table->engine = 'InnoDB';
