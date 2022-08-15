@@ -2,19 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Receta extends Model
 {
-    use HasFactory;
-
-    protected $attributes = [
-        'activo' => false
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'publicar',
+        'activo',
+    
     ];
+    
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'publicar',
+    
+    ];
+    
+    protected $appends = ['resource_url'];
 
-    public function users()
+    /* ************************ ACCESSOR ************************* */
+
+    public function getResourceUrlAttribute()
     {
-        return $this->hasOne(User::class);
+        return url('/admin/recetas/'.$this->getKey());
     }
 }
