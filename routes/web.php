@@ -14,62 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('admin-users')->name('admin-users/')->group(static function() {
-            Route::get('/',                                             'AdminUsersController@index')->name('index');
-            Route::get('/create',                                       'AdminUsersController@create')->name('create');
-            Route::post('/',                                            'AdminUsersController@store')->name('store');
-            Route::get('/{adminUser}/impersonal-login',                 'AdminUsersController@impersonalLogin')->name('impersonal-login');
-            Route::get('/{adminUser}/edit',                             'AdminUsersController@edit')->name('edit');
-            Route::post('/{adminUser}',                                 'AdminUsersController@update')->name('update');
-            Route::delete('/{adminUser}',                               'AdminUsersController@destroy')->name('destroy');
-            Route::get('/{adminUser}/resend-activation',                'AdminUsersController@resendActivationEmail')->name('resendActivationEmail');
-        });
-    });
+Route::resource('recetas','App\Http\Controllers\RecetaController');
+
+Route::get('/seccion', function () {
+    return view('seccion.index');
 });
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::get('/profile',                                      'ProfileController@editProfile')->name('edit-profile');
-        Route::post('/profile',                                     'ProfileController@updateProfile')->name('update-profile');
-        Route::get('/password',                                     'ProfileController@editPassword')->name('edit-password');
-        Route::post('/password',                                    'ProfileController@updatePassword')->name('update-password');
-    });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dash', function () {
+        return view('dash.index');
+    })->name('dash');
 });
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('posts')->name('posts/')->group(static function() {
-            Route::get('/',                                             'PostsController@index')->name('index');
-            Route::get('/create',                                       'PostsController@create')->name('create');
-            Route::post('/',                                            'PostsController@store')->name('store');
-            Route::get('/{post}/edit',                                  'PostsController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'PostsController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{post}',                                      'PostsController@update')->name('update');
-            Route::delete('/{post}',                                    'PostsController@destroy')->name('destroy');
-        });
-    });
-});
+Auth::routes();
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
-        Route::prefix('recetas')->name('recetas/')->group(static function() {
-            Route::get('/',                                             'RecetasController@index')->name('index');
-            Route::get('/create',                                       'RecetasController@create')->name('create');
-            Route::post('/',                                            'RecetasController@store')->name('store');
-            Route::get('/{recetum}/edit',                               'RecetasController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'RecetasController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{recetum}',                                   'RecetasController@update')->name('update');
-            Route::delete('/{recetum}',                                 'RecetasController@destroy')->name('destroy');
-        });
-    });
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
