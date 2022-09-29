@@ -1,6 +1,9 @@
-@extends('resources.assets')
-
-@section('content')
+<!doctype html>
+  <html lang="es">
+  <head>
+      @include('resources.backoffice.header')
+  </head>
+<body>
 <div class="m-2">
     <h1 class="bg-info text-white text-center">EDITAR RECETA: {{$receta->id}}</h1>
 <form action="/recetas/{{$receta->id}}" method="POST">
@@ -20,7 +23,7 @@
     <div class="mb-3">
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="enabled" name="enabled" value='{{$receta->enabled}}'>
-        <label class="form-check-label" for="enabled">Activo</label>
+        <label class="form-check-label" for="enabled">Estado</label>
       </div>
     </div>
 
@@ -33,4 +36,9 @@
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>
 </div>
-@endsection
+
+@include('resources.backoffice.footer_script')
+
+</body>
+</html>
+

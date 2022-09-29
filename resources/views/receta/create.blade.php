@@ -1,6 +1,9 @@
-@extends('resources.assets')
-
-@section('content')
+<!doctype html>
+  <html lang="es">
+  <head>
+      @include('resources.backoffice.header')
+  </head>
+<body>
 <div class="m-2">
     <h1 class="bg-info text-white text-center"> NUEVA RECETA </h1>
 <form action="/recetas" method="POST">
@@ -31,4 +34,8 @@
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>
 </div>
-@endsection
+@include('resources.backoffice.footer_script')
+
+</body>
+</html>
+
