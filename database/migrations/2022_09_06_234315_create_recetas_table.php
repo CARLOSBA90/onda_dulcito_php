@@ -18,7 +18,7 @@ class CreateRecetasTable extends Migration
             $table->string('nombre')->unique();
             $table->string('descripcion',2000);
             $table->timestamps();
-            $table->date('published_at')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->boolean('enabled')->default(false);
 
             /* 

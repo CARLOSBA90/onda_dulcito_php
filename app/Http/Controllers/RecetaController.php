@@ -40,8 +40,8 @@ class RecetaController extends Controller
         $receta->id = $request->get('id');
         $receta->nombre = $request->get('nombre');
         $receta->descripcion = $request->get('descripcion');
-      //  $receta->enabled = $request->get('enabled');
-      //  $receta->published_at = $request->get('published_at');
+        $receta->enabled = $request->get('enabled')=='1'? 1 : 0;
+        $receta->published_at = $request->get('published_at');
         $receta->save();
 
         return redirect('/recetas');
@@ -79,12 +79,10 @@ class RecetaController extends Controller
      */
     public function update(Request $request, $id){  
         $receta = Receta::find($id);
- 
-       // $receta->id = $request->get('id');
         $receta->nombre = $request->get('nombre');
         $receta->descripcion = $request->get('descripcion');
-      //  $receta->enabled = $request->get('enabled');
-      //  $receta->published_at = $request->get('published_at');
+        $receta->enabled = $request->get('enabled')=='1'? 1 : 0;
+        $receta->published_at = $request->get('published_at');
         $receta->save();
         return redirect('/recetas');
     }

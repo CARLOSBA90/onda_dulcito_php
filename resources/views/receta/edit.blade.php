@@ -22,7 +22,7 @@
 
     <div class="mb-3">
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="enabled" name="enabled" value="1" <?php if($receta->enabled==1) echo 'checked';?>>
+        <label class="switch"><input type="checkbox" id="enabled" name="enabled" value="1" @if($receta->enabled==1) checked @endif><span class="slider round"></span></label>
         <label class="form-check-label" for="enabled">Estado</label>
       </div>
     </div>

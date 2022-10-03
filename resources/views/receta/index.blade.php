@@ -17,8 +17,8 @@
   <thead class="bg-primary text-white">
     <tr>
       <th scope="col" class="text-center">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col" class="text-center">Fecha</th>
+      <th scope="col">Titulo</th>
+      <th scope="col" class="text-center">Fecha Publicaci&oacute;n</th>
       <th scope="col" class="text-center">Estado</th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -29,15 +29,18 @@
       <tr>
            <td class="text-center">{{$receta->id}}</td>
            <td>{{$receta->nombre}}</td>
-           <td class="text-center">>>Fecha<< {{$receta->published_at}}</td>
-           <td class="text-center">{{$receta->enabled}} <label class="switch"><input type="checkbox" value="{{$receta->enabled}}" checked><span class="slider round"></span></label></td>
+           <td class="text-center">{{$receta->published_at}}</td>
+           <td class="text-center"><label class="switch"><input id="estado-{{$receta->id}}"type="checkbox" value="1" @if($receta->enabled==1) checked @endif><span class="slider round"></span></label></td>
            <td class="text-center"><a class="btn btn-primary" href="/recetas/{{$receta->id}}/edit"> Editar</a></td>
 
-           <td>
-            <form action="{{ route ('recetas.destroy',$receta->id)}}" method="POST">
+           <td class="text-center">
+            <form action="{{ route ('recetas.destroy',$receta->id)}}" method="POST"> <? /*onsubmit="return confirm('Confirma que desea borrar la receta con titulo {{$receta->nombre}}');" enctype="multipart/form-data"*/?>
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Launch demo modal
+            </button>
             </form>
           </td>
       </tr>
@@ -47,13 +50,36 @@
 </table>
 </div>
 
+
+<?//-----------------------MODAL---------------------------/?>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?//--------------------------------------------------------/?>
 @include('resources.backoffice.footer_script')
 @include('resources.backoffice.crud.datatable_script')
 
 <script>
   $(document).ready(function () {
             $('#recetas').DataTable({
-            "lengthMenu": [[5,10,50,-1], [5,10,50,"Todos"]],
+            "lengthMenu": [[10,20,50,-1], [10,20,50,"Todos"]],
             "responsive": true,
             "autoWidth": true,
             "ordering":false,
