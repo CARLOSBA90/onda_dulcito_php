@@ -3,12 +3,13 @@
   <head>
 @include('resources.backoffice.header')
 @include('resources.backoffice.crud.datatable_css')
-
-
   </head>
 <body>
 <div class="container-fluid">
-<h1 class="bg-info text-white text-center"> RECETAS </h1>
+<h1 class="bg-info text-white text-center">RECETAS</h1>
+
+<span class="index-loader" id="index-loader" style="display:none;"><div class="lds-ripple"><div></div><div></div></div></span>
+
 <div class="m-2">
 <a href="recetas/create" class="btn btn-success">Nuevo </a>
 </div>
@@ -28,18 +29,18 @@
     @foreach($recetas as $receta)
       <tr>
            <td class="text-center">{{$receta->id}}</td>
-           <td>{{$receta->nombre}}</td>
+           <td id="titulo-{{$receta->id}}">{{$receta->nombre}}</td>
            <td class="text-center">{{$receta->published_at}}</td>
-           <td class="text-center"><label class="switch"><input id="estado-{{$receta->id}}"type="checkbox" value="1" @if($receta->enabled==1) checked @endif><span class="slider round"></span></label></td>
+           <td class="text-center"><label class="switch"><input class="enable_button" id="estado-{{$receta->id}}" type="checkbox" value="1" onchange="enable('{{$receta->id}}')" @if($receta->enabled==1) checked @endif><span class="slider round"></span></label></td>
            <td class="text-center"><a class="btn btn-primary" href="/recetas/{{$receta->id}}/edit"> Editar</a></td>
 
            <td class="text-center">
             <form action="{{ route ('recetas.destroy',$receta->id)}}" method="POST"> <? /*onsubmit="return confirm('Confirma que desea borrar la receta con titulo {{$receta->nombre}}');" enctype="multipart/form-data"*/?>
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Launch demo modal
+            <button type="submit" style="display:none;" id="borrar-{{$receta->id}}"></button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" data-bs-whatever="{{$receta->id}}">
+              Eliminar
             </button>
             </form>
           </td>
@@ -54,19 +55,20 @@
 <?//-----------------------MODAL---------------------------/?>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="modalLabel">Aviso de confirmaci&oacuten</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+         <span id="modal-message"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" onclick="borrar_receta()">Confirmar</button>
+        <input type="hidden" id="valor_modalEliminar" value="" />
       </div>
     </div>
   </div>
@@ -111,8 +113,36 @@
                 },
           } );
         });
+
+        function borrar_receta(){ $("#borrar-"+$("#valor_modalEliminar").val()).click(); }
+
+        const modalEliminar = document.getElementById('modalEliminar');
+              modalEliminar.addEventListener('show.bs.modal', event => {
+              const button = event.relatedTarget;
+              const idReceta = button.getAttribute('data-bs-whatever');
+              $("#valor_modalEliminar").val(idReceta);
+              $("#modal-message").text("¿Deseas eliminar la receta con titulo '"+$("#titulo-"+idReceta).text()+"'?");
+            })
+
+        function enable(id){ 
+          $(".enable_button").prop('disabled', true);
+          $("#index-loader").show();
+
+          const Http = new XMLHttpRequest();
+          const url="recetas/enable/"+id;
+
+          //-----LLAMADA AJAX -----//
+            Http.open("GET", url);
+            Http.send();
+            Http.onreadystatechange = (e) => {
+              console.log(Http.responseText)
+              $(".enable_button").prop('disabled', false);
+              $("#index-loader").hide();
+            }
+          //---------------------///
+        }
   </script>
-</body>
+ </body>
 </html>
 
 

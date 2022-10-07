@@ -18,21 +18,43 @@ Route::get('/', function () {
 });
 
 
+
+
+//-------------SECCIONES-----------------------//
+Route::get('/seccion', function () { return view('seccion.index'); });
+
+//------------------------------------------//
+
+
+//-------------RECETAS-----------------------//
 Route::resource('recetas','App\Http\Controllers\RecetaController');
+Route::get('/recetas/enable/{id}', 'App\Http\Controllers\RecetaController@enable');
 
-Route::get('/seccion', function () {
-    return view('seccion.index');
-});
 
+//------------------------------------------//
+
+
+
+//-------------MIDDLEWARE-------------------//
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
+
 ])->group(function () {
+
+
     Route::get('/dash', function () {
         return view('dash.index');
     })->name('dash');
+
+
+
+
 });
+
+//------------------------------------------//
+
 
 Auth::routes();
 

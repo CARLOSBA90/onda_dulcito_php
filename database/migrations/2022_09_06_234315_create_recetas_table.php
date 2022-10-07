@@ -15,8 +15,8 @@ class CreateRecetasTable extends Migration
     {
         Schema::create('recetas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
-            $table->string('descripcion',2000);
+            $table->string('nombre',300)->unique();
+            $table->string('descripcion',4000);
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->boolean('enabled')->default(false);

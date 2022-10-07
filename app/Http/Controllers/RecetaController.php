@@ -36,6 +36,7 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validation($request);
         $receta = new Receta();
         $receta->id = $request->get('id');
         $receta->nombre = $request->get('nombre');
@@ -78,6 +79,8 @@ class RecetaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){  
+        $this->validation($request);
+
         $receta = Receta::find($id);
         $receta->nombre = $request->get('nombre');
         $receta->descripcion = $request->get('descripcion');
@@ -98,5 +101,21 @@ class RecetaController extends Controller
         $receta = Receta::find($id);
         $receta->delete();
         return redirect('/recetas');
+    }
+
+    public function validation(Request $request)
+    {
+          $validated = $request->validate([
+            'nombre' => 'required|max:300',   ///|unique:recetas /// a futuro evitar que se borren datos del form
+            'descripcion' => 'required|max:4000',
+        ]);
+    }
+
+    public function enable($id)
+    {
+        $receta = Receta::find($id);
+        $receta->enabled = !$receta->enabled;
+        $receta->save();
+        return 1;
     }
 }
