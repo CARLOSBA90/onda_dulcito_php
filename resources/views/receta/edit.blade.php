@@ -2,6 +2,7 @@
   <html lang="es">
   <head>
       @include('resources.backoffice.header')
+      @include('resources.backoffice.crud.editor_header')
   </head>
 <body>
 <div class="m-2">
@@ -25,9 +26,9 @@
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value='{{$receta->nombre}}'>
     </div>
 
-      <div class="mb-3">
+      <div class="mb-3" style="display:none;" id="div-editor">
         <label for="descripcion" class="form-label">Descripci&oacute;n</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="10">{{$receta->descripcion}}</textarea>
+        <textarea class="form-control" id="editor" name="descripcion" rows="10">{{$receta->descripcion}}</textarea>
       </div>
 
     <div class="mb-3">
@@ -46,9 +47,8 @@
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>
 </div>
-
 @include('resources.backoffice.footer_script')
-
+@include('resources.backoffice.crud.editor_footer')
 </body>
 </html>
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DropzoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,6 @@ Route::get('/', function () {
 
 
 
-
 //-------------SECCIONES-----------------------//
 Route::get('/seccion', function () { return view('seccion.index'); });
 
@@ -30,9 +30,14 @@ Route::get('/seccion', function () { return view('seccion.index'); });
 Route::resource('recetas','App\Http\Controllers\RecetaController');
 Route::get('/recetas/enable/{id}', 'App\Http\Controllers\RecetaController@enable');
 
-
 //------------------------------------------//
 
+//-------------IMAGENES-----------------------//
+Route::get('dropzone', [DropzoneController::class, 'dropzone']);
+Route::post('dropzone/store', [DropzoneController::class, 'dropzoneStore'])->name('dropzone.store');
+
+
+//------------------------------------------//
 
 
 //-------------MIDDLEWARE-------------------//

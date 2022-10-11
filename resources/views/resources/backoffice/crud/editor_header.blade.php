@@ -1,0 +1,1 @@
+<link href="{{ asset('css/ckeditor/editor.css') }}" rel="stylesheet">

@@ -134,11 +134,23 @@
           //-----LLAMADA AJAX -----//
             Http.open("GET", url);
             Http.send();
-            Http.onreadystatechange = (e) => {
-              console.log(Http.responseText)
-              $(".enable_button").prop('disabled', false);
-              $("#index-loader").hide();
+            Http.onreadystatechange=function(){
+              if(this.readyState==4){
+                if(this.status==200 && !parseInt(Http.responseText)){
+
+                  alert("Error al intentar cambiar el estado de la receta ID "+id); /// mejorar mensaje
+
+                  if($("#estado-"+id).is(":checked")) 
+                      $("#estado-"+id).prop("checked", false );
+                  else $("#estado-"+id).prop("checked", true );
+                    }
+
+               $(".enable_button").prop('disabled', false);
+               $("#index-loader").hide();
+              }
             }
+
+        
           //---------------------///
         }
   </script>
