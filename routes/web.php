@@ -29,6 +29,7 @@ Route::get('/seccion', function () { return view('seccion.index'); });
 //-------------RECETAS-----------------------//
 Route::resource('recetas','App\Http\Controllers\RecetaController');
 Route::get('/recetas/enable/{id}', 'App\Http\Controllers\RecetaController@enable');
+Route::get('/recetas/imagen/{id}/{nombre}/{descripcion}', 'App\Http\Controllers\RecetaController@imagen');
 
 //------------------------------------------//
 

@@ -10,4 +10,9 @@ class Receta extends Model
     use HasFactory;
 
 
+    public function imagen()
+    {
+        return $this->hasMany('App\Models\imagen');
+    }
+    
 }

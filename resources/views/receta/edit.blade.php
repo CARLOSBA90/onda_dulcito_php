@@ -43,6 +43,10 @@
         <input type="datetime-local" id="published_at" name="published_at" value='{{$receta->published_at}}'>
     </div>
 
+    <input type="hidden" name="id" id="id" value="{{$receta->id}}"/>
+    <input type="hidden" name="nuevo" value="0"/>
+
+
      <button type="submit" class="btn btn-success" tabindex="4">Guardar</button>
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>

@@ -15,15 +15,15 @@ class CreateImagensTable extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('path');
-            $table->boolean('enabled')->default(true);
-            $table->string('descripcion',300);
+            $table->foreignId('receta_id');
+            $table->string('name',64);
+            $table->boolean('enabled')->default(false);
+            $table->string('descripcion',128);
             $table->timestamps();
-
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
+            $table->unique(['receta_id','name']);
         });
     }
 

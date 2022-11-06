@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Imagen extends Model
 {
     use HasFactory;
+
+    public function receta()
+    {
+        return $this->belongsTo('App\Models\Receta','receta_id','id');
+    }
 }

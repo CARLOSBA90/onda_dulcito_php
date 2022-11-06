@@ -12,7 +12,6 @@
             <form action="{{ route('dropzone.store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
                 @csrf
                 <div>
-                    <h3>Imagenes</h3>
                 </div>
             </form>
         </div>

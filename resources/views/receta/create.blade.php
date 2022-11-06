@@ -27,6 +27,7 @@
         <label for="descripcion" class="form-label">Descripci&oacute;n</label>
         <textarea class="form-control" id="editor" name="descripcion" rows="10">{{ old('descripcion') }}</textarea>
       </div>
+    
 
     <div class="mb-3">
       <div class="form-check form-switch">
@@ -39,10 +40,15 @@
         <label for="published_at">Fecha Publicaci&oacute;n</label>
         <input type="datetime-local" id="published_at" name="published_at" value="{{ old('published_at') }}">
     </div>
+   
+    <input type="hidden" name="id" id="id" value="{{$randomID}}"/>
+    <input type="hidden" name="nuevo" value="1"/>
 
      <button type="submit" class="btn btn-success" tabindex="4">Guardar</button>
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>
+
+  
 </div>
 @include('resources.backoffice.footer_script')
 @include('resources.backoffice.crud.editor_footer')

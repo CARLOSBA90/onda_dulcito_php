@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Receta;
+use App\Models\Imagen;
+
 
 class RecetaController extends Controller
 {
@@ -25,7 +27,10 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        return view('receta.create');
+        $randomID = abs(crc32(uniqid()));
+        while(Receta::select("*")->where('id', $randomID)->exists()){ $randomID = abs(crc32(uniqid())); }
+
+        return view('receta.create')->with('randomID', $randomID);
     }
 
     /**
@@ -37,13 +42,19 @@ class RecetaController extends Controller
     public function store(Request $request)
     {
         $this->validation($request);
+
         $receta = new Receta();
-        $receta->id = $request->get('id');
         $receta->nombre = $request->get('nombre');
         $receta->descripcion = $request->get('descripcion');
         $receta->enabled = $request->get('enabled')=='1'? 1 : 0;
         $receta->published_at = $request->get('published_at');
         $receta->save();
+
+        /// Reemplazamos el ID temporal por el ID generado en la tabla IMAGEN
+        $temp_id = $request->get('id');
+        Imagen::where('receta_id',$temp_id)
+              ->update(['receta_id' => $receta->id]);
+        ///
 
         return redirect('/recetas');
     }
@@ -116,6 +127,19 @@ class RecetaController extends Controller
         $receta = Receta::find($id);
         $receta->enabled = !$receta->enabled;
         $receta->save();
+        return 1;
+    }
+
+    
+    public function imagen($id,$nombre,$descripcion)
+    {
+      /// T0D0, VALIDACION PARA NO RE-INSERTAR UNA IMAGEN DOS VECES EN BBDD(CONTROLADO EN JAVASCRIPT)
+        $imagen = new Imagen();
+        $imagen->name = $nombre;
+        $imagen->receta_id = $id;
+        $imagen->descripcion = "Nombre original del archivo ".$descripcion.", Insertado en la fecha ".date('Y-m-d H:i:s');
+        $imagen->enabled = true;    
+        $imagen->save();
         return 1;
     }
 }

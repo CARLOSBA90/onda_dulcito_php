@@ -20,7 +20,6 @@ class CreateRecetasTable extends Migration
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->boolean('enabled')->default(false);
-
             /* 
             $table->unsignedInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admin_users')->onUpdate('cascade');*/
