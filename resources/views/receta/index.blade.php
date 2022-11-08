@@ -81,7 +81,7 @@
 <script>
   $(document).ready(function () {
             $('#recetas').DataTable({
-            "lengthMenu": [[10,20,50,-1], [10,20,50,"Todos"]],
+            "lengthMenu": [[25,50,100,-1], [25,50,100,"Todos"]],
             "responsive": true,
             "autoWidth": true,
             "ordering":false,
