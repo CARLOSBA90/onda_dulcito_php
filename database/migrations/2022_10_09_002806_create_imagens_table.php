@@ -16,9 +16,9 @@ class CreateImagensTable extends Migration
         Schema::create('imagens', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('receta_id');
-            $table->string('name',64);
+            $table->string('name',64);  ///path
             $table->boolean('enabled')->default(false);
-            $table->string('descripcion',128);
+            $table->string('descripcion',128); ///nombre original de archivo
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';

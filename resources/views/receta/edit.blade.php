@@ -1,10 +1,10 @@
-<!doctype html>
-  <html lang="es">
-  <head>
-      @include('resources.backoffice.header')
-      @include('resources.backoffice.crud.editor_header')
-  </head>
-<body>
+@extends('adminlte::page')
+  @section('css')
+    @include('resources.backoffice.header')
+    @include('resources.backoffice.crud.editor_header')
+  @stop 
+
+@section('content')
 <div class="m-2">
     <h1 class="bg-info text-white text-center">EDITAR RECETA: {{$receta->id}}</h1>
 @if ($errors->any())
@@ -24,6 +24,15 @@
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value='{{$receta->nombre}}'>
+    </div>
+
+    <div class="mb-3">
+      <label for="seccion" class="form-label">Secci&oacute;n</label>
+      <select class="form-select" aria-label="seccion" id="seccion" name="seccion">
+        @foreach($receta->secciones as $seccion)
+        <option value="{{$seccion->id}}"  @if ($seccion->id=== $receta->seccion_id) selected @endif>{{$seccion->nombre}}</option>
+      @endforeach
+    </select>
     </div>
 
       <div class="mb-3" style="display:none;" id="div-editor">
@@ -51,8 +60,22 @@
      <a href="/recetas" class="btn btn-primary">Volver</a>
     </form>
 </div>
-@include('resources.backoffice.footer_script')
-@include('resources.backoffice.crud.editor_footer')
-</body>
-</html>
 
+<div class="container mt-2">
+  <div class="row">
+      <div class="col-md-12">
+          <form action="{{ route('dropzone.store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
+              @csrf
+              <div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+@stop
+
+  @section('js')
+    @include('resources.backoffice.footer_script')
+    @include('resources.backoffice.crud.editor_footer')
+  @stop

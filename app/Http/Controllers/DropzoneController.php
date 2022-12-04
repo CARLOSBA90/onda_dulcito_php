@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Imagen;
+use App\Services\ImagenService;
 
 class DropzoneController extends Controller
 {
@@ -22,11 +23,7 @@ class DropzoneController extends Controller
      */
     public function dropzoneStore(Request $request)
     {
-        $image = $request->file('file');
-        $filename = uniqid();
-        $imageName = $filename.'.'.$image->extension();
-        $image->move(public_path('images'),$imageName);
-    
-        return response()->json(['success'=>$imageName]);
+        $imageName = ImagenService::guardar($request);
+        return response()->json(['success'=> $imageName]);
     }
 }

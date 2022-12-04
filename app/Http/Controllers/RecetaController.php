@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Receta;
-use App\Models\Imagen;
 use App\Services\RecetaService;
 
 
@@ -16,8 +15,7 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $recetas = Receta::all();
-        return view('receta.index')->with('recetas',$recetas);
+            return RecetaService::index(); 
     }
 
     /**
@@ -27,7 +25,7 @@ class RecetaController extends Controller
      */
     public function create()
     {
-         return view('receta.create')->with('randomID', RecetaService::randomID());
+           return RecetaService::nuevo();
     }
 
     /**
@@ -53,9 +51,9 @@ class RecetaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return RecetaService::show();
     }
 
     /**
@@ -66,9 +64,7 @@ class RecetaController extends Controller
      */
     public function edit($id)
     {
-       $receta = Receta::find($id);
-
-       return view('receta.edit')->with('receta',$receta);
+       return view('receta.edit')->with('receta',RecetaService::editar($id));
     }
 
     /**
@@ -81,9 +77,7 @@ class RecetaController extends Controller
     public function update(Request $request, $id)
     {  
         $this->validation($request);
-
         RecetaService::actualiza($request,$id);
-
         return redirect('/recetas');
     }
 
@@ -95,8 +89,7 @@ class RecetaController extends Controller
      */
     public function destroy($id)
     {
-        $receta = Receta::find($id);
-        $receta->delete();
+        RecetaService::elimina($id);
         return redirect('/recetas');
     }
 
@@ -110,9 +103,7 @@ class RecetaController extends Controller
 
     public function enable($id)
     {
-        $receta = Receta::find($id);
-        $receta->enabled = !$receta->enabled;
-        $receta->save();
+        RecetaService::enable($id);
         return 1;
     }
 
@@ -120,12 +111,7 @@ class RecetaController extends Controller
     public function imagen($id,$nombre,$descripcion)
     {
       /// T0D0, VALIDACION PARA NO RE-INSERTAR UNA IMAGEN DOS VECES EN BBDD(CONTROLADO EN JAVASCRIPT)
-        $imagen = new Imagen();
-        $imagen->name = $nombre;
-        $imagen->receta_id = $id;
-        $imagen->descripcion = "Nombre original del archivo ".$descripcion.", Insertado en la fecha ".date('Y-m-d H:i:s');
-        $imagen->enabled = true;    
-        $imagen->save();
+        RecetaService::imagen($id,$nombre,$descripcion);
         return 1;
     }
 }

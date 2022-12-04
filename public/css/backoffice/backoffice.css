@@ -125,3 +125,13 @@
 .center
 { text-align: center; 
     vertical-align: middle;}
+
+.pointer{
+  transition: 0.7s;
+} 
+
+.pointer:hover{
+  cursor: pointer; 
+  background-color: #0dcaf0;
+  color:white !important;
+}

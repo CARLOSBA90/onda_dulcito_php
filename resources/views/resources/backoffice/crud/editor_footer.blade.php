@@ -1,15 +1,3 @@
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-md-12">
-            <form action="{{ route('dropzone.store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
-                @csrf
-                <div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 <script> 
   let neditor = null;

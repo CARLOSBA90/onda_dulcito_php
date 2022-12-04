@@ -12,7 +12,13 @@ class Receta extends Model
 
     public function imagen()
     {
-        return $this->hasMany('App\Models\imagen');
+        return $this->hasMany('App\Models\Imagen');
+    }
+
+
+    public function seccion()
+    {
+        return $this->belongsTo('App\Models\Seccion','seccion_id','id');
     }
     
 }
